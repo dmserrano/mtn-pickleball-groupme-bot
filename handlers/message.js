@@ -1,9 +1,14 @@
 const { channelIdMap, disabledMessageTypes } = require('../constants/slack');
 const { getSlackMessageTextWithUserName } = require('../services/slack/index');
+const { postGroupMeMessage } = require('../services/groupme/index');
 
 const messageHandler = async message => {
-    const text = await getSlackMessageTextWithUserName(message);
-    console.log(text);
+    try {
+        const text = await getSlackMessageTextWithUserName(message);
+        postGroupMeMessage(text);        
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 const messageMiddleware = async ({ event, message, next }) => {
