@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy": "bash deploy.sh",
     "dev": "node_modules/nodemon/bin/nodemon.js ./index.js",
     "start": "node index.js"
   },
