@@ -1,11 +1,14 @@
 const axios = require('axios');
 
 const GROUP_ME_TOKEN = process.env.GROUPME_ACCESS_TOKEN;
-const GROUP_ME_BASE_URL = 'https://api.groupme.com/v3';
-const GROUP_ID = "88392421";
-const BOT_ID = "c271b97cc2200de5292f5d4c4f";
-const BOT_NAME = "Mid TN Pickleball GroupMe";
+const { BOT_ID,
+    BOT_NAME,
+    GROUP_ME_BASE_URL,
+    GROUP_ID 
+} = require('../../constants/groupMe/index');
 
+// TODO: add command to register bot for a specific groupme group
+// it will also need persistence
 const registerGroupMeBot = async () => {
     const payload = {
         bot : {

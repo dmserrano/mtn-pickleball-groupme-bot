@@ -1,6 +1,6 @@
-const parseMessageText = (user, payload) => {
+const parseMessageText = (user, command) => {
     const userName = user.real_name;
-    const messageText = payload.text;
+    const messageText = command.text;
 
     return `${userName}: ${messageText}`;
 };

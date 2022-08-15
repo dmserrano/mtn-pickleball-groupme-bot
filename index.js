@@ -1,7 +1,8 @@
 require('dotenv').config();
 const { App } = require('@slack/bolt');
 
-const { messageHandler, messageMiddleware } = require('./handlers/message');
+const { commands } = require('./constants/slack/index');
+const { messageHandler } = require('./handlers/message');
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
@@ -16,4 +17,4 @@ const app = new App({
   console.log('MT Pickleball GroupMe Bot is running!');
 })();
 
-app.message(messageMiddleware, messageHandler);
+app.command(commands.SEND, messageHandler);

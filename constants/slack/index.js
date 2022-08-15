@@ -35,7 +35,12 @@ const disabledMessageTypes = [
     'message_deleted'
 ];
 
+const commands = {
+    SEND: '/send'
+};
+
 module.exports = {
     channelIdMap,
+    commands,
     disabledMessageTypes
 };
