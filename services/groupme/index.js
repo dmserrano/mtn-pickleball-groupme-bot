@@ -1,6 +1,5 @@
 const axios = require('axios');
 
-const GROUP_ME_TOKEN = process.env.GROUPME_ACCESS_TOKEN;
 const { BOT_ID,
     BOT_NAME,
     GROUP_ME_BASE_URL,

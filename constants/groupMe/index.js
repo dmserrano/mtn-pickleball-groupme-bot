@@ -1,7 +1,8 @@
-const BOT_ID = "c271b97cc2200de5292f5d4c4f";
+const BOT_ID = process.env.GROUP_ME_BOT_ID;
 const BOT_NAME = "Mid TN Pickleball GroupMe";
+const GROUP_ID = process.env.GROUP_ME_GROUP_ID;
 const GROUP_ME_BASE_URL = 'https://api.groupme.com/v3';
-const GROUP_ID = "88392421";
+const GROUP_ME_TOKEN = process.env.GROUP_ME_ACCESS_TOKEN;
 
 module.exports = {
     BOT_ID,
