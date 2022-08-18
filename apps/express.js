@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const { postMessageToChannelWithApi } = require("../services/slack/index");
-const port = process.env.PORT + 1 || 3001;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());

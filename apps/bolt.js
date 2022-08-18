@@ -11,7 +11,7 @@ const boltApp = new App({
 });
 
 (async () => {
-	await boltApp.start(process.env.PORT || 3000);
+	await boltApp.start(process.env.BOLT_PORT || 3001);
 
 	console.log("MT Pickleball GroupMe Bot is running!");
 })();
