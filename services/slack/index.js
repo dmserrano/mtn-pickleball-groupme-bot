@@ -10,9 +10,6 @@ const {
 
 const axiosConfig = {
 	headers: {
-		// 'application/json' is the modern content-type for JSON, but some
-		// older servers may use 'text/json'.
-		// See: http://bit.ly/text-json
 		Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
 	},
 };
