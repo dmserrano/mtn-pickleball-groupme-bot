@@ -1,13 +1,47 @@
+const axios = require("axios");
+
 const { parseMessageText } = require("../../utils/slack");
 const { formatError, formatLog } = require("../../utils/logs");
-const { channelIdMap } = require("../../constants/slack/index");
+const {
+	SLACK_BOT_TOKEN,
+	SLACK_CHANNEL,
+	SLACK_WEB_API_BASE_URL,
+} = require("../../constants/slack/index");
 
-const postMessageToBotChannel = async (client, mesage) => {
+const axiosConfig = {
+	headers: {
+		// 'application/json' is the modern content-type for JSON, but some
+		// older servers may use 'text/json'.
+		// See: http://bit.ly/text-json
+		Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
+	},
+};
+
+const postMessageToChannel = async (client, mesage) => {
 	try {
 		const response = await client.chat.postMessage({
-			channel: channelIdMap.mtGroupmeBot,
+			channel: SLACK_CHANNEL,
 			text: mesage,
 		});
+
+		formatLog(response);
+	} catch (error) {
+		formatError(error);
+	}
+};
+
+const postMessageToChannelWithApi = async ({ name, text }) => {
+	const payload = {
+		channel: SLACK_CHANNEL,
+		text: `${name}: ${text}`,
+	};
+
+	try {
+		const response = await axios.post(
+			`${SLACK_WEB_API_BASE_URL}/chat.postMessage`,
+			payload,
+			axiosConfig
+		);
 
 		formatLog(response);
 	} catch (error) {
@@ -22,7 +56,7 @@ const getSlackMessageTextWithUserName = async ({
 	client,
 }) => {
 	const userId = command?.user_id;
-	const { members } = await client?.users.list();
+	const { members } = await client.users.list();
 
 	await ack();
 
@@ -31,7 +65,7 @@ const getSlackMessageTextWithUserName = async ({
 	if (!currentUser) {
 		const errorMessage = `User ${userId} doesn't exist`;
 		formatError(null, errorMessage);
-		postMessageToBotChannel(client, errorMessage);
+		postMessageToChannel(client, errorMessage);
 		return;
 	}
 
@@ -42,5 +76,6 @@ const getSlackMessageTextWithUserName = async ({
 
 module.exports = {
 	getSlackMessageTextWithUserName,
-	postMessageToBotChannel,
+	postMessageToChannel,
+	postMessageToChannelWithApi,
 };

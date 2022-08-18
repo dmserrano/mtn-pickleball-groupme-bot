@@ -1,7 +1,8 @@
-const channelIdMap = {
-	mtGroupmeBot: "C03T65C2Y6T",
-	mtJuliet: "C03TC6WJRJ7",
-};
+const { NODE_ENV, SLACK_BOT_TOKEN } = process.env;
+
+const BOT_CHANNEL_ID = "C03T65C2Y6T";
+const CHANNEL_ID = "C03TC6WJRJ7";
+const SLACK_CHANNEL = NODE_ENV === "development" ? BOT_CHANNEL_ID : CHANNEL_ID;
 
 const disabledMessageTypes = [
 	"bot_message",
@@ -39,8 +40,12 @@ const commands = {
 	SEND: "/send",
 };
 
+const SLACK_WEB_API_BASE_URL = "https://slack.com/api";
+
 module.exports = {
-	channelIdMap,
 	commands,
 	disabledMessageTypes,
+	SLACK_BOT_TOKEN,
+	SLACK_CHANNEL,
+	SLACK_WEB_API_BASE_URL,
 };
