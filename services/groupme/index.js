@@ -8,7 +8,7 @@ const {
 	GROUP_ME_ACCESS_TOKEN,
 } = require("../../constants/groupMe/index");
 const { formatError, formatLog } = require("../../utils/logs");
-const { postMessageToBotChannel } = require("../../services/slack/index");
+const { postMessageToChannel } = require("../../services/slack/index");
 
 // TODO: add command to register bot for a specific groupme group
 // it will also need persistence
@@ -47,7 +47,7 @@ const postGroupMeMessage = async (command, text) => {
 		formatLog(response);
 	} catch (error) {
 		const errorMessage = formatError(error);
-		postMessageToBotChannel(command.client, errorMessage);
+		postMessageToChannel(command.client, errorMessage);
 	}
 };
 

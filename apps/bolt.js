@@ -17,3 +17,5 @@ const boltApp = new App({
 })();
 
 boltApp.command(commands.SEND, commandHandler);
+// TODO: get events to work
+// boltApp.event(events.MEMBER_JOINED_CHANNEL, eventHandler);
